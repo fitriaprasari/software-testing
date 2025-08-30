@@ -1,0 +1,35 @@
+digraph CFG {
+    node [shape=box, style=rounded];
+
+    Entry [label="Entry"];
+    Init [label="Init: n = pattern.length(), lps = [0...], len=0, i=1"];
+
+    WhileCheck [label="while (i < n)?"];
+
+    IfMatch [label="if (pattern[i] == pattern[len])"];
+    MatchTrue [label="len++;\nlps[i] = len;\ni++"];
+
+    MatchFalse [label="else"];
+    IfLenNotZero [label="if (len != 0)?"];
+    Fallback [label="len = lps[len-1]"];
+    SetZero [label="lps[i] = 0;\ni++"];
+
+    Exit [label="return lps"];
+
+    # Edges
+    Entry -> Init -> WhileCheck;
+    WhileCheck -> IfMatch [label="true"];
+    WhileCheck -> Exit [label="false"];
+
+    IfMatch -> MatchTrue [label="true"];
+    IfMatch -> MatchFalse [label="false"];
+
+    MatchTrue -> WhileCheck;
+
+    MatchFalse -> IfLenNotZero;
+    IfLenNotZero -> Fallback [label="true"];
+    IfLenNotZero -> SetZero [label="false"];
+
+    Fallback -> WhileCheck;
+    SetZero -> WhileCheck;
+}

@@ -1,0 +1,25 @@
+digraph CFG {
+    rankdir=LR;
+    node [shape=box, style=rounded];
+
+    Start [label="Start: init n, lps"];
+    Init [label="Init: i=1, len=0"];
+    While [label="while (i < n)?"];
+    IfMatch [label="if (pattern[i] == pattern[len])"];
+    Match [label="Match:\nlen++;\nlps[i]=len;\ni++"];
+    Mismatch [label="Else: if (len != 0)?"];
+    Reduce [label="len = lps[len-1]"];
+    Zero [label="lps[i]=0; i++"];
+    End [label="return lps"];
+
+    Start -> Init -> While;
+    While -> IfMatch [label="true"];
+    While -> End [label="false"];
+    IfMatch -> Match [label="true"];
+    IfMatch -> Mismatch [label="false"];
+    Match -> While;
+    Mismatch -> Reduce [label="true"];
+    Mismatch -> Zero [label="false"];
+    Reduce -> While;
+    Zero -> While;
+}
