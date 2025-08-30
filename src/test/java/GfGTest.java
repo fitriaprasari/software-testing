@@ -1,7 +1,7 @@
-import org.example.*;
 import org.junit.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.example.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

@@ -40,7 +40,7 @@ public class GfG {
         }
     }
 
-    static ArrayList<Integer> search(String pat, String txt) {
+    public static ArrayList<Integer> search(String pat, String txt) {
         int n = txt.length();
         int m = pat.length();
 
